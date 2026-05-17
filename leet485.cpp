@@ -12,8 +12,7 @@ int findMaxOnes(vector<int> &nums) {
         if(nums[r] != 0) r++;
         else {
             ++r;
-            l = r;
-            
+            l = r; 
         }
         int res = r - l;
         mx = max(mx, res);
