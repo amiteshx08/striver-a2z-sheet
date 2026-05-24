@@ -5,40 +5,32 @@ using namespace std;
 
 vector<int> pivotArray(vector<int> &nums, int pivot) {
     int n = nums.size();
-    vector<int> nums_s;
-    vector<int> nums_b;
-    vector<int> pivots;
-    for(int i = 0; i < n; ++i) {
+    vector<int> ans(n, 0);
+    int i = 0; int j = n - 1; //These pointers will be used to iterate over nums
+    int ni = 0; int nj = n - 1; //These pointers will be used to iterate over ans
+
+    while(i < n) {
         if(nums[i] < pivot) {
-            nums_s.push_back(nums[i]);
+            ans[ni] = nums[i];
+            ni++;
         }
-        if(nums[i] > pivot) {
-            nums_b.push_back(nums[i]);
+        if(nums[j] > pivot) {
+            ans[nj] = nums[j]; 
+            nj--;
         }
-        if(nums[i] == pivot){
-            pivots.push_back(nums[i]);
-        }
+        i++;
+        j--;
     }
-    
-    vector<int> t;
-    // Merging logic
-    
-    for(int j = 0; j < nums_s.size(); ++j) {
-        t.push_back(nums_s[j]);
+    while(ni <= nj) {
+        ans[ni] = pivot;
+        ni++;
     }
-    for(int k = 0; k < pivots.size(); ++k) {
-        t.push_back(pivots[k]);
-    }
-    for(int l = 0; l < nums_b.size(); ++l) {
-        t.push_back(nums_b[l]);
-    }
-    
-    
-    return t;
+    return ans;
+
 }
 int main() {
-    vector<int> nums = {-3,4,3,2};
-    int pivot = 2;
+    vector<int> nums = {9,12,5,10,14,3,10};
+    int pivot = 10;
     vector<int> r = pivotArray(nums, pivot);
     for(int i = 0; i < r.size(); ++i) {
         cout << r[i] << " ";
